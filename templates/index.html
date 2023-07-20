@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/index.css" />
+  </head>
+  <body>
+    <section class="main">
+      <h1>the following is the board:</h1>
+      <h2>Highscore: {{score}}</h2>
+      <p class="scorer hidden">Current Score: <a class="score"></a></p>
+      <p>times played: {{tplay}}</p>
+
+      <div class="btns">
+        <button id="start-btn">Start Game</button>
+        <input
+          type="button"
+          value="Restart Game"
+          class="re-btn"
+          onClick="window.location.reload();" />
+      </div>
+
+      <div class="timer hidden">
+        <p>Timer: <a class="time"></a></p>
+      </div>
+
+      <div class="msgs">
+        <p class="msg"></p>
+      </div>
+
+      <table class="board">
+        <tbody>
+          {% for row in board %}
+          <tr>
+            {% for cell in row %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <form method="POST" class="submit-form">
+        <label for="word">Type your guess:</label>
+        <input type="text" name="word" class="word" placeholder="ex. Hello" />
+        <button>Submit</button>
+      </form>
+    </section>
+
+    <script src="/static/main.js"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script>
+      const re_start_btn = document.querySelector(".re-btn");
+
+      let game = new BoggleGame("boggle", 60);
+    </script>
+  </body>
+</html>
